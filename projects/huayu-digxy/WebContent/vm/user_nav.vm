@@ -1,0 +1,46 @@
+<nav class="left_menu">
+	<ul>	
+		<li>
+			<a href="#">个人中心</a>
+			<ul>
+				<li $stringTools.equalsReturn('center', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/user/index')" >个人设置</a></li>
+				<li $stringTools.equalsReturn('myImage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/upload/imageindex')">修改头像</a></li>
+				 <li $stringTools.equalsReturn('myattentive', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/user/attentive')">我的关注</a></li> 
+				<!-- <li $stringTools.equalsReturn('mycollect', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/collecter/my')">我的收藏</a></li> -->
+				<!--<li $stringTools.equalsReturn('myshared', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/res/myshared')">我的分享</a></li>
+				<li $stringTools.equalsReturn('myproject', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/p/me')">我的项目</a></li>-->
+				<li $stringTools.equalsReturn('mycomment', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/comment/my')" >我的评论</a></li>
+				<li $stringTools.equalsReturn('mymessage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/message/myreceive')" >我的消息</a></li>
+				<li $stringTools.equalsReturn('myfiles', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/pr/me')" >我的文档</a></li>
+			<!--	<li $stringTools.equalsReturn('mydownload', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/res/mydownload')" >我的下载</a></li> -->
+			</ul>
+		</li>
+		<!--<li>
+			<a href="#">文档资料</a>
+			<ul>
+				 <li $stringTools.equalsReturn('upload', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/res/new')" >我要上传</a></li>
+				<li $stringTools.equalsReturn('myfiles', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/pr/me')" >我的文档</a></li>
+				<li $stringTools.equalsReturn('mydownload', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/res/mydownload')" >我的下载</a></li> 
+			</ul>
+		</li>-->
+		#if($urole != 1)
+		<li>
+			<a href="#">后台管理</a>
+			<ul>
+				<li $stringTools.equalsReturn('usermanage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/user/m')" >会员管理</a></li>
+				<li $stringTools.equalsReturn('resmanage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/pr/manage')" >文档资源管理</a></li>
+				<li $stringTools.equalsReturn('projectmanage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/p/m')" >项目管理</a></li>
+				<li $stringTools.equalsReturn('mailmanage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/message/m')" >消息管理</a></li>
+				<li $stringTools.equalsReturn('mailmanage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/message/m')" >信息发布管理</a></li>
+				<li $stringTools.equalsReturn('commentmanage', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/comment/m')" >评论管理</a></li>
+				<li $stringTools.equalsReturn('link', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/link/index')" >友情链接</a></li>
+				<li $stringTools.equalsReturn('keyword', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/key/m')" >关键词管理</a></li>
+				<li $stringTools.equalsReturn('expert', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/expert/m')" >专家管理</a></li>
+				<li $stringTools.equalsReturn('helper', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('/helper/resume')" >帮助中心</a></li>
+				<li $stringTools.equalsReturn('grower', $curPage,"class='li_selected'") ><a href="#" onclick="hyCom.redirect('')" >成才管理</a></li>
+			</ul>
+		</li>
+		#end
+	</ul>
+</nav>
+

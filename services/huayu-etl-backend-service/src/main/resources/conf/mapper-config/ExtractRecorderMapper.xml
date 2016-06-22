@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--  add by xzh -->
+<mapper namespace="com.huayu.etl.backend.dao.ExtractRecorderDao">
+
+	<resultMap id="BaseResultMap_Ext" type="com.huayu.etl.backend.bo.ExtractRecorder">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="table_id" property="tableId" jdbcType="BIGINT" />
+		<result column="export_date" property="exportDate" jdbcType="VARCHAR" />
+		<result column="current_max_id" property="currentMaxId" jdbcType="BIGINT" />
+		<result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+		<result column="create_date" property="createDate"  />
+		<result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+		<result column="update_date" property="updateDate"  />
+		
+		<result column="table_name" property="tableName"  />
+	</resultMap>
+
+	<select id="selectRecorders" resultMap="BaseResultMap_Ext">
+		select r.* , t.name table_name
+		from tb_extract_recorder r left join tb_app_table t
+		on r.table_id = t.id
+		<where>
+			<include refid="Base_Param_Condition"></include>
+			<if test="tableName != null">
+				and t.name = #{tableName}
+			</if>
+			<if test="appId != null">
+				and t.app_id = #{appId}
+			</if>
+
+			<if test="ids != null and ids.size() > 0">
+				and r.id in
+				<foreach collection="ids" item="elem" open="(" separator=","
+					close=")">
+					#{elem}
+				</foreach>
+			</if>
+		</where>
+		<if test="orderBy != null">
+			order by #{orderBy}
+		</if>
+		<if test="beginNum != null and offset != null">
+			limit #{beginNum} , #{offset}
+		</if>
+	</select>
+
+	<select id="selectMaxRecorderIds" resultType="java.lang.Long">
+		select Max(r.id) id
+		from tb_extract_recorder r left join tb_app_table t
+		on r.table_id = t.id
+		<where>
+			<include refid="Base_Param_Condition"></include>
+			<if test="tableName != null">
+				and t.name = #{tableName}
+			</if>
+			<if test="appId != null">
+				and t.app_id = #{appId}
+			</if>
+		</where>
+
+		group by r.table_id
+
+	</select>
+	
+	<insert id="insertBatchSelective" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+	insert into tb_extract_recorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+			table_id ,
+			export_date ,
+			current_max_id ,
+			update_user_id ,
+			update_date ,
+    </trim>
+	values
+	<foreach collection="list" item="elem" separator=",">
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{elem.tableId ,jdbcType= BIGINT} ,
+				#{elem.exportDate ,jdbcType= VARCHAR} ,
+				#{elem.currentMaxId ,jdbcType= BIGINT} ,
+				#{elem.updateUserId ,jdbcType= BIGINT} ,
+				#{elem.updateDate} ,
+		</trim>
+	</foreach>
+   
+  </insert>
+</mapper>

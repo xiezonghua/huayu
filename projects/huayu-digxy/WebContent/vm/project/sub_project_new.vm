@@ -1,0 +1,92 @@
+#parse("/vm/header.vm")
+	<link style="text/css" rel="stylesheet" href="../css/jquery.fileupload.css" />
+	
+	<script type="text/javascript" src="../js/frame/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="../js/frame/jquery.iframe-transport.js"></script>
+	<script type="text/javascript" src="../js/frame/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="../js/hy.facade.js"></script>
+		<nav class="navigation">
+			<h2>当前位置:</h2>
+			<ul>
+				<li><a href="/index">迪格学苑</a></li>
+				<li>$data.name</li>
+				<li>创建子项目</li>
+			</ul>
+		</nav>
+
+		<section class="article_aside ">
+			<article class="singleton_input">
+				<form action="#">
+					<input class="hidden" id="projectId" value="${data.id}"/>
+					<section>
+						<label for="name">项目名称：</label>
+						<input id="name" name="name"/> 
+						<span id="name_msg"></span>
+					</section>
+					<section>
+						 <label for="flagImage">标志图：</label>
+						 <input type="text" id="flagImage" name="flagImage" placeholder="项目代表图"> 
+						 <span id="flagImage_msg"></span>
+						 <section style="text-align:center;">
+							<section>
+						    	<span class="btn btn-success fileinput-button">
+						       	 	<i class="glyphicon glyphicon-plus"></i>
+						        	<span>上传标志图片</span>
+						        	<!-- The file input field used as target for the file upload widget -->
+						        	<input id="uploadFlagImage" type="file" name="myFile" multiple >
+						    	</span>
+						    </section>
+					    </section>
+					</section>
+					<section>
+						<label for="description">介绍：</label>
+						<textarea rows="8" cols="47" id="description" name="description" placeholder="项目介绍"></textarea>
+						<span id="description_msg"></span>
+					</section>
+					<section>
+						<label for="goal">目标：</label>
+						<textarea rows="8" cols="47" id="goal" name="goal" placeholder="项目目标"></textarea>
+						<span id="description_msg"></span>
+					</section>
+				</form>
+				
+				<p style="font-size:1.2em;color:#cccc00;">基础资料信息:  
+					<span id="resCollapseId" class="ic-arrow ic-arrow-down"></span> 
+					<img src="../images/add.png" style="width:15px;height:15px;cursor: pointer;" title="添加基础资料" alt="添加基础资料" onclick="hy.subProject.addCourseResourceHtml('courseResourceWrapper','courseResourceCount');" />
+				</p>
+				
+				<form  id="courseResourceWrapper">
+						<input value="0" id="courseResourceCount" class="hidden" />
+				</form>
+				<p style="text-align:center;">
+					<img src="../images/add.png"  style="cursor: pointer;" title="添加骨干成员" alt="添加基础资料" onclick="hy.subProject.addCourseResourceHtml('courseResourceWrapper','courseResourceCount');" />
+				</p>
+				
+				<section>
+					<p>
+					<section>
+						<p class="white_button" style="text-align: right;">
+							<input  type="button" value="保存信息"  onclick="hy.subProject.add();"/>
+							<input  type="button" value="取消" />
+						</p>
+					</section>
+					</p>
+				</section>
+			</article>
+		
+			<aside>
+			<section>
+			</section>
+		</section>
+		</aside>
+		</section>
+			<script type="text/javascript" src="../js/hy.subProject.js">
+			
+			</script>	
+			
+			<script>
+				hyCom.upload("uploadFlagImage" , "flagImage");
+	
+				hyFacade.folding("resCollapseId" , "courseResourceWrapper");
+			</script>
+#parse("/vm/footer.vm")	

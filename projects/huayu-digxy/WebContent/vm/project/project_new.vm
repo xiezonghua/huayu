@@ -1,0 +1,244 @@
+#parse("/vm/header.vm")
+	<link style="text/css" rel="stylesheet" href="../css/jquery.fileupload.css" />
+	
+	<script type="text/javascript" src="../js/frame/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="../js/frame/jquery.iframe-transport.js"></script>
+	<script type="text/javascript" src="../js/frame/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="../js/hy.facade.js"></script>
+		<nav class="navigation">
+			<h2>当前位置:</h2>
+			<ul>
+				<li><a href="/index">迪格学苑</a></li>
+				<li>项目发起</li>
+			</ul>
+		</nav>
+
+		<section class="article_aside ">
+			<article class="singleton_input">
+				<form action="#">
+					<section>
+						<label for="name">项目名称：</label>
+						<input id="name" name="name"/> 
+						<span id="name_msg"></span>
+					</section>
+					 <section class="hidden">
+						<label for="beginDatetime">计划开始时间：</label>
+						<input  id="beginDatetime" name="beginDatetime"/> 
+						<span id="beginDatetime_msg"></span>
+					</section>
+					<section class="hidden">
+						<label for="endDatetime">计划结束时间：</label>
+						<input  id="endDatetime" name="endDatetime"/> 
+						<span id="endDatetime_msg"></span>
+					</section>
+					<!-- <section>
+						<label for="docName">文档：</label>
+						<input class="un-editable" id="docName" name="docName" disabled="disabled"/> 
+					</section> -->
+				<!-- 	<section>
+						<label for="resName">标题：</label>
+						 <input type="text" id="resName" name="resName" placeholder="资源名称"> 
+						 <span id="userName_msg"></span>
+					</section> -->
+					<section class="hidden">
+						<label for="attenderLimit">参与人数：</label>
+						<input  id="attenderLimit" name="attenderLimit"/> 
+						<span id="attenderLimit_msg"></span>
+					</section>
+					<section>
+						<label for="description">介绍：</label>
+						<textarea rows="8" cols="47" id="description" name="description" placeholder="项目介绍"></textarea>
+						<span id="description_msg"></span>
+					</section>
+					<section>
+						 <label for="flagImage">标志图：</label>
+						 <input type="text" id="flagImage" name="flagImage" placeholder="项目代表图"> 
+						 <span id="flagImage_msg"></span>
+					</section>
+					
+					<!-- <section>
+						 <label for="resLabel">项目标签：</label>
+						 <input type="text" id="resLabel" name="resLabel" placeholder="标签,分号隔开"> 
+						 <p id="resLabel_msg"></p>
+					</section> -->
+					<section class="hidden">
+						<label for="planDoc">企划书：</label>
+						<input class="un-editable" id="planDoc" name="planDoc" disabled="disabled"/> 
+						<span id="planDoc_msg"></span>
+					</section>
+					<section class="hidden">
+						<label for="fosterDoc">骨干人才资料：</label>
+						<input class="un-editable" id="fosterDoc" name="fosterDoc" disabled="disabled"/> 
+						<span id="fosterDoc_msg"></span>
+					</section>
+					<section class="hidden">
+						<label for="talentsDoc">人才计划书：</label>
+						<input class="un-editable" id="talentsDoc" name="talentsDoc" disabled="disabled"/> 
+						<span id="talentsDoc_msg"></span>
+					</section>
+					
+					<p style="font-size:1.2em;color:#cccc00;">创建人信息 <span id="creatorCollapseId" class="ic-arrow ic-arrow-down"></span> </p>		
+					<section style="border:1px solid #00F" id="creatorWrapperId">
+						<section >
+							<label for="member.name">姓名：</label>
+							<input id="member.name" name="member.name"/> 
+							<span id="member.name_msg"></span>
+						</section>
+						<section >
+							<label for="member.imgSrc">头像：</label>
+							<input id="member.imgSrc" name="member.imgSrc"/> 
+							<span id="member.imgSrc_msg"></span>
+		
+								<section style="text-align:center;">
+									    <span class="btn btn-success fileinput-button">
+									        <i class="glyphicon glyphicon-plus"></i>
+									        <span>上传创建人头像</span>
+									        <!-- The file input field used as target for the file upload widget -->
+									        <input id="uploadImgSrc" type="file" name="myFile" multiple >
+									    </span>
+									</section>
+				
+						</section>
+						<section >
+							<label for="member.education">学历：</label>
+							<input id="member.education" name="member.education"/> 
+							<span id="member.education_msg"></span>
+						</section>
+						<section >
+							<label for="member.researchFields">研究领域：</label>
+							<input id="member.researchFields" name="member.researchFields"/> 
+							<span id="member.researchFields_msg"></span>
+						</section>
+						<section >
+							<label for="member.responsibility">职责：</label>
+							<input id="member.responsibility" name="member.responsibility"/> 
+							<span id="member.responsibility_msg"></span>
+						</section>
+						<section >
+							<label for="member.job">单位（公司/学校）：</label>
+							<input id="member.job" name="member.job"/> 
+							<span id="member.job_msg"></span>
+						</section>
+						<section >
+							<label for="member.jobTitle">职务：</label>
+							<input id="member.jobTitle" name="member.jobTitle"/> 
+							<span id="member.jobTitle_msg"></span>
+						</section>
+						<section >
+							<label for="member.projectExperience">项目经验</label>
+							<textarea  rows="10" cols="40" id="member.projectExperience" name="member.projectExperience" ></textarea>
+							<span id="member.projectExperience_msg"></span>
+						</section>
+					</section>
+					
+					
+				
+					
+				</form>
+				
+				<p style="font-size:1.2em;color:#cccc00;">骨干成员信息 
+					<span id="boneCollapseId" class="ic-arrow ic-arrow-down"></span> 
+					<img src="../images/add.png" style="width:15px;height:15px;cursor: pointer;" title="添加骨干成员" alt="添加骨干成员" onclick="hy.project.addBoneMemberHtml('boneMemberWrapper','boneMemberCount');" />
+				</p>
+				
+				<form  id="boneMemberWrapper">
+						<input value="0" id="boneMemberCount" class="hidden" />
+				</form>
+				<p style="text-align:center;">
+					<img src="../images/add.png"  style="cursor: pointer;" title="添加骨干成员" alt="添加骨干成员" onclick="hy.project.addBoneMemberHtml('boneMemberWrapper','boneMemberCount');" />
+				</p>
+				
+				<section>
+					<p>
+					<section>
+						<p class="white_button" style="text-align: right;">
+							<input  type="button" value="保存信息"  onclick="hy.project.add();"/>
+							<input  type="button" value="取消" />
+						</p>
+					</section>
+					</p>
+				</section>
+			</article>
+		
+			<aside>
+			<section>
+				<form id="uploadForm" action="res/upload" method="post">
+				<section style="text-align:center;">
+					<section>
+					    <span class="btn btn-success fileinput-button">
+					        <i class="glyphicon glyphicon-plus"></i>
+					        <span>上传标志图片</span>
+					        <!-- The file input field used as target for the file upload widget -->
+					        <input id="uploadFlagImage" type="file" name="myFile" multiple >
+					    </span>
+					</section>
+				</section>
+			</form>
+			</section>
+		<section class="hidden">
+			<form id="uploadForm" action="res/upload" method="post">
+				<section style="text-align:center;">
+					<section>
+					    <span class="btn btn-success fileinput-button">
+					        <i class="glyphicon glyphicon-plus"></i>
+					        <span>上传项目企划书</span>
+					        <!-- The file input field used as target for the file upload widget -->
+					        <input id="uploadPlanDoc" type="file" name="myFile" multiple >
+					    </span>
+					</section>
+				</section>
+			</form>
+			
+			<form id="uploadForm" action="res/upload" method="post">
+				<section style="text-align:center;">
+					<section>
+					    <span class="btn btn-success fileinput-button">
+					        <i class="glyphicon glyphicon-plus"></i>
+					        <span>上传项目骨干人才资料</span>
+					        <!-- The file input field used as target for the file upload widget -->
+					        <input id="uploadFosterDoc" type="file" name="myFile" multiple >
+					    </span>
+					</section>
+				</section>
+			</form>
+
+			<form id="uploadForm" action="res/upload" method="post">
+				<section style="text-align:center;">
+					<section>
+					    <span class="btn btn-success fileinput-button">
+					        <i class="glyphicon glyphicon-plus"></i>
+					        <span>上传项目人才培养计划</span>
+					        <!-- The file input field used as target for the file upload widget -->
+					        <input id="uploadTalentsDoc" type="file" name="myFile" multiple >
+					    </span>
+					</section>
+				</section>
+			</form>
+			<section>
+					<blockquote>
+						<p>1.您可以上传日常积累和撰写的文档资料，如模板、总结，支持多种文档类型：</p>
+					<p>默认允许上传doc，xls，ppt，docx，xlsx，pptx，pdf 文件.</p>
+					<p>2.上传涉及侵权内容的文档将会被移除。如何判断文档是否侵权？查看网站协议和用户规则</p>
+					<p>3.上传有问题需要帮助？查看上传帮助和意见反馈</p>
+					<p>4.为营造绿色网络环境，严禁上传含有淫秽色情及低俗信息等文档，让我们一起携手共同打造健康文档分享环境</p>
+					</blockquote>
+				
+			</section>
+		</section>
+		</aside>
+		</section>
+			<script type="text/javascript" src="../js/hy.project.js">
+			
+			</script>	
+			
+			<script>
+				hyCom.upload("uploadImgSrc" , "member.imgSrc");
+				hyCom.upload("uploadFlagImage" , "flagImage");
+				hyCom.upload("uploadPlanDoc" , "planDoc");
+				hyCom.upload("uploadFosterDoc" , "fosterDoc");
+				hyCom.upload("uploadTalentsDoc" , "talentsDoc");
+				
+				hyFacade.folding("boneCollapseId" , "boneMemberWrapper");
+				hyFacade.folding("creatorCollapseId" , "creatorWrapperId");
+			</script>
+#parse("/vm/footer.vm")	

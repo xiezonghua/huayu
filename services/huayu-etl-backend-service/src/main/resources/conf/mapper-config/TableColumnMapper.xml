@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- add by xzh -->
+<mapper namespace="com.huayu.etl.backend.dao.TableColumnDao">
+	<select id="selectCloumns"  resultMap="BaseResultMap">
+		select c.* 
+		from tb_table_column c left join tb_app_table t on c.table_id = t.id
+		<where>
+			<include refid="Base_Param_Condition"></include>  
+			<if test="tableName != null">
+				and t.name = #{tableName}
+			</if>
+			<if test="appId != null">
+				and t.app_id = #{appId}
+			</if>
+			
+		</where>	
+		<if test="orderBy != null">
+        order by #{orderBy}
+   		 </if>
+	</select>
+</mapper>

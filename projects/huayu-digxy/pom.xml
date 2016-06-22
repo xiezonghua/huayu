@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.huayu.projects</groupId>
+		<artifactId>huayu-projects</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.huayu.project</groupId>
+	<artifactId>huayu-digxy</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>huayu-digxy</name>
+	<packaging>war</packaging>
+
+
+	<properties>
+		<war-name>digxy</war-name>
+		<jetty-version>9.0.2.v20130417</jetty-version>
+	</properties>
+
+	<dependencies>
+		<!-- velocity -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- Jetty begin -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>${jetty-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty-version}</version>
+		</dependency>
+		<!-- Jetty end -->
+
+		<dependency>
+			<groupId>com.huayu.could</groupId>
+			<artifactId>huayu-web-platform</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${war-name}</finalName>
+
+		<plugins>
+			<!-- add by v_xiezonghua for clean lib|classes begin -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/WebContent/WEB-INF/</directory>
+							<includes>
+								<include>classes/**/**</include>
+								<include>lib/*</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<!-- add by v_xiezonghua for clean lib|classes end -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<webappDirectory>WebContent</webappDirectory>
+					<warName>${war-name}</warName>
+					<webXml>${basedir}/src/main/resources/web.xml</webXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<executable><!-- path-to-javac -->
+					</executable>
+					<compilerVersion>1.7</compilerVersion>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty-version}</version>
+				<configuration>
+					<!-- <jettyXml>src\main\resources/jetty/jetty.xml</jettyXml> -->
+					<!-- <jettyXml>jetty.xml,jetty-ssl.xml,jetty-https.xml</jettyXml> -->
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppSourceDirectory>${project.basedir}/WebContent</webAppSourceDirectory>
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
+					<httpConnector>
+						<port>8080</port>
+						<idleTimeout>60000</idleTimeout>
+					</httpConnector>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

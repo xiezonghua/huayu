@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link style="text/css" rel="stylesheet" href="../css/menu.css" />
+<link style="text/css" rel="stylesheet" href="../css/main1.css" />
+<link style="text/css" rel="stylesheet" href="../css/user.css" />
+<link style="text/css" rel="stylesheet" href="../css/page.css" />
+<link href="../umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<link rel="shortcut icon" href="../images/yxylogo.png" >
+
+<script type="text/javascript" src="../js/frame/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="../js/layer/layer.js"></script>
+<script type="text/javascript" src="../js/hy.com.js"></script>
+<script type="text/javascript" src="../js/hy.user.common.js"></script>		
+
+</head>
+
+<body>
+	<div class="body_fixed_header">
+		<header>
+			<section id="title">
+				<a href="/index" style="  text-decoration:none;">
+				<img src="../images/yxylogo.png" alt="logo" title="logo" />
+				<h2>迪格学苑</h2>
+				<sub style="color:white;">开放式学习，个性化学习，探索性学习</sub>
+				</a>
+			</section>
+	
+			<!-- <nav class="menu bolder">
+				<ul>
+					<li><a href="../index">首页</a></li>
+					<li><a href="../search?resType=1">学习</a></li>
+					<li><a href="../search?resType=2">研究</a></li>
+					<li><a href="../search?resType=3">成才</a></li>
+				</ul>
+			</nav>
+			<form class="search" action="#" method="post">
+				<label for="search_content">Search</label> 
+				<input type="text" name="search_content" id="search_content" placeholder="Search" />
+			</form> -->
+			<section id="regist_login">
+				#if( $uname )
+					<ul>
+						<li><a id="userLogin" href="../user/index">${uname}</a></li>
+						<li><a href="#" onclick="hyUserCom.signout();">退出</a></li>
+					</ul>
+				#else
+					<ul>
+					 	<li><span class="link" style="letter-spacing: 0.05em;color: #fff;" onclick="hyUserCom.loginDialog('', 0);">登录</span></li>
+						<li><span class="link" style="letter-spacing: 0.05em;color: #fff;"  onclick="hyUserCom.loginDialog('', 1);">注册</span></li>
+			 		</ul>
+				#end
+				<!-- end login regist -->
+			</section>
+		</header>
+	</div>
+	<div id="wrapper">

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+	<tool>
+		<key>stringTools</key>
+		<scope>application</scope>
+		<class>com.huayu.platform.utils.StringTools</class>
+	</tool>
+	<tool>
+		<key>dateTools</key>
+		<scope>application</scope>
+		<class>com.huayu.platform.utils.DateBaseUtils</class>
+	</tool>
+	<tool>
+		<key>jsonTools</key>
+		<scope>application</scope>
+		<class>com.huayu.platform.utils.JsonUtils</class>
+	</tool>
+	
+	
+</toolbox>

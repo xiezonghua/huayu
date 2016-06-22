@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- add by xzh -->
+		 						 						 						 						 	
+<mapper namespace="com.huayu.etl.backend.dao.TaskLogDao">
+	<resultMap id="BaseResultMap" type="com.huayu.etl.backend.bo.TaskLog">
+	
+
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="task_id" property="taskId" jdbcType="BIGINT" />
+		<result column="log_level" property="logLevel" jdbcType="TINYINT" />
+		<result column="msg" property="msg" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate"  />
+
+	</resultMap>
+	<sql id="Base_Param_Condition">
+	  		<if test="id != null">
+		 	and id = #{id} 
+		</if>
+       		<if test="taskId != null">
+		 	and task_id = #{taskId} 
+		</if>
+       		<if test="logLevel != null">
+		 	and log_level = #{logLevel} 
+		</if>
+       		<if test="msg != null">
+		 	and msg = #{msg} 
+		</if>
+       		<if test="createDate != null">
+		 	and create_date = #{createDate} 
+		</if>
+       	</sql>
+	
+   <sql id="Base_Condition">
+   	<where>
+		<include refid="Base_Param_Condition"></include>  	
+   	</where>
+   	<if test="orderBy != null">
+        order by #{orderBy}
+    </if>
+        <if test="beginNum != null and offset != null">
+            limit #{beginNum} , #{offset}
+    </if>
+   	
+   </sql>
+
+  <sql id="Base_Column_List">
+	
+	id, task_id, log_level, msg, create_date 
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    
+	
+    select 
+    <include refid="Base_Column_List" />
+    from tb_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    
+	
+    select 
+    <include refid="Base_Column_List" />
+    from tb_task_log
+  </select>
+  
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    
+ 	select    
+   	 <include refid="Base_Column_List" />
+   	from tb_task_log
+   	<where>
+		<include refid="Base_Param_Condition"></include>  
+  	</where>
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    
+ 	select    
+   	 <include refid="Base_Column_List" />
+   	from tb_task_log
+	 <include refid="Base_Condition" />
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+	
+   
+    delete from tb_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.huayu.etl.backend.bo.TaskLog" useGeneratedKeys="true" keyProperty="id">
+	
+    <![CDATA[
+    insert into tb_user (
+    	id, task_id, log_level, msg, create_date 
+	)
+    values (
+    	#{id ,jdbcType=BIGINT} , #{taskId ,jdbcType=BIGINT} , #{logLevel ,jdbcType=TINYINT} , #{msg ,jdbcType=VARCHAR}, #{createDate}
+    ]]>
+	
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.huayu.etl.backend.bo.TaskLog" useGeneratedKeys="true" keyProperty="id">
+	
+    
+	insert into tb_task_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">
+			id ,
+		</if>
+		<if test="taskId != null">
+			task_id ,
+		</if>
+		<if test="logLevel != null">
+			log_level ,
+		</if>
+		<if test="msg != null">
+			msg ,
+		</if>
+		<if test="createDate != null">
+			create_date ,
+		</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">
+				#{id ,jdbcType= BIGINT} ,
+				</if>
+		<if test="taskId != null">
+				#{taskId ,jdbcType= BIGINT} ,
+				</if>
+		<if test="logLevel != null">
+				#{logLevel ,jdbcType= TINYINT} ,
+				</if>
+		<if test="msg != null">
+				#{msg ,jdbcType= VARCHAR} ,
+				</if>
+		<if test="createDate != null">
+				#{createDate} , 
+				</if>
+    </trim>
+  </insert>
+  
+  <select id="count" resultType="java.lang.Long">
+	
+	
+    select count(*) from tb_task_log
+     <include refid="Base_Condition" />
+  </select>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.huayu.etl.backend.bo.TaskLog">
+    
+	
+    update tb_task_log
+    <set>
+			<if test="id != null">
+				id = #{id ,jdbcType= BIGINT} ,
+				</if>
+       		<if test="taskId != null">
+				task_id = #{taskId ,jdbcType= BIGINT} ,
+				</if>
+       		<if test="logLevel != null">
+				log_level = #{logLevel ,jdbcType= TINYINT} ,
+				</if>
+       		<if test="msg != null">
+				msg = #{msg ,jdbcType= VARCHAR} ,
+				</if>
+       		<if test="createDate != null">
+				create_date = #{createDate} ,
+				</if>
+       	</set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huayu.etl.backend.bo.TaskLog">
+   
+   
+    update tb_task_log
+	<trim prefix="set"  suffixOverrides=",">
+					id = #{id ,jdbcType= BIGINT} ,
+							task_id = #{taskId ,jdbcType= BIGINT} ,
+							log_level = #{logLevel ,jdbcType= TINYINT} ,
+							msg = #{msg ,jdbcType= VARCHAR} ,
+							create_date = #{createDate} ,  
+				</trim>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
