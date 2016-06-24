@@ -26,5 +26,6 @@
 	<modules>
 		<module>huayu-base-platform</module>
 		<module>huayu-web-platform</module>
+		<module>huayu-doc</module>
 	</modules>
 </project>
